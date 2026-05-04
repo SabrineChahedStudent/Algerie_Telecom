@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body { font-family: Arial, sans-serif; background: #f4f4f4; margin: 0; padding: 0; }
+        .container { max-width: 600px; margin: 30px auto; background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .header { background: #2e7d32; color: white; padding: 24px; text-align: center; }
+        .header h1 { margin: 0; font-size: 22px; }
+        .body { padding: 32px; color: #333; }
+        .statut-badge { display: inline-block; background: #e8f5e9; color: #2e7d32; padding: 8px 20px; border-radius: 20px; font-weight: bold; font-size: 16px; margin: 16px 0; }
+        .ticket-info { background: #f9f9f9; border-left: 4px solid #2e7d32; padding: 16px; border-radius: 4px; margin: 16px 0; }
+        .resolution { background: #e8f5e9; padding: 16px; border-radius: 8px; margin: 16px 0; }
+        .footer { background: #f4f4f4; padding: 16px; text-align: center; font-size: 12px; color: #999; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>✅ Algérie Télécom — Réclamation résolue</h1>
+        </div>
+        <div class="body">
+            <p>Bonjour <strong>{{ client_prenom }} {{ client_nom }}</strong>,</p>
+            <p>Bonne nouvelle ! Votre réclamation a été <strong>résolue</strong> par notre équipe.</p>
+            <div class="statut-badge">Résolu</div>
+            <div class="ticket-info">
+                <p><strong>N° Ticket :</strong> {{ numero_ticket }}</p>
+                <p><strong>Objet :</strong> {{ titre }}</p>
+                <p><strong>Agent :</strong> {{ agent_nom }}</p>
+                <p><strong>Date résolution :</strong> {{ date }}</p>
+            </div>
+            {% if resolution %}
+            <div class="resolution">
+                <p><strong>Solution apportée :</strong></p>
+                <p>{{ resolution }}</p>
+            </div>
+            {% endif %}
+            <p>Nous vous invitons à évaluer la qualité du service reçu en vous connectant à votre espace client.</p>
+            <p>Cordialement,<br><strong>Le Service Client Algérie Télécom</strong></p>
+        </div>
+        <div class="footer">
+            <p>Algérie Télécom — Ne pas répondre à cet email automatique.</p>
+        </div>
+    </div>
+</body>
+</html>

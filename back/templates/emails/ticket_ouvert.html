@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body { font-family: Arial, sans-serif; background: #f4f4f4; margin: 0; padding: 0; }
+        .container { max-width: 600px; margin: 30px auto; background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .header { background: #006994; color: white; padding: 24px; text-align: center; }
+        .header h1 { margin: 0; font-size: 22px; }
+        .body { padding: 32px; color: #333; }
+        .ticket-info { background: #f9f9f9; border-left: 4px solid #006994; padding: 16px; border-radius: 4px; margin: 16px 0; }
+        .footer { background: #f4f4f4; padding: 16px; text-align: center; font-size: 12px; color: #999; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📩 Algérie Télécom — Réclamation enregistrée</h1>
+        </div>
+        <div class="body">
+            <p>Bonjour <strong>{{ client_prenom }} {{ client_nom }}</strong>,</p>
+            <p>Votre réclamation a bien été enregistrée et sera traitée dans les meilleurs délais.</p>
+            <div class="ticket-info">
+                <p><strong>N° Ticket :</strong> {{ numero_ticket }}</p>
+                <p><strong>Objet :</strong> {{ titre }}</p>
+                <p><strong>Service :</strong> {{ type_service }}</p>
+                <p><strong>Priorité :</strong> {{ priorite }}</p>
+                <p><strong>Date :</strong> {{ date }}</p>
+            </div>
+            <p>Un agent prendra en charge votre demande prochainement. Vous serez notifié par email à chaque mise à jour.</p>
+            <p>Cordialement,<br><strong>Le Service Client Algérie Télécom</strong></p>
+        </div>
+        <div class="footer">
+            <p>Algérie Télécom — Ne pas répondre à cet email automatique.</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,334 @@
+@reference "../../../index.css";
+
+.workspace-view-container {
+  @apply space-y-10 pb-20;
+  animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(100px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInBottom {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.workspace-toolbar {
+  @apply flex flex-col xl:flex-row justify-between items-center gap-8 bg-white p-8 rounded-3xl border shadow-xl;
+}
+
+.workspace-agent-info {
+  @apply flex items-center gap-6;
+}
+
+.workspace-role-icon {
+  @apply bg-[#0055A4]/5 p-4 rounded-3xl border border-[#0055A4]/10 text-[#0055A4];
+}
+
+.workspace-agent-details {
+  @apply space-y-1;
+}
+
+.workspace-title {
+  @apply text-3xl font-black text-slate-900 tracking-tighter uppercase leading-none;
+}
+
+.workspace-agent-name {
+  @apply text-[10px] font-black text-emerald-600 uppercase tracking-widest mt-2;
+}
+
+.workspace-actions {
+  @apply flex items-center gap-4 w-full xl:w-auto;
+}
+
+.workspace-search-wrapper {
+  @apply relative flex-1 xl:w-64 min-w-[200px];
+}
+
+.workspace-search-icon {
+  @apply absolute left-4 top-3.5 h-4 w-4 text-slate-400;
+}
+
+.workspace-search-input {
+  @apply pl-12 h-12 rounded-2xl text-xs font-bold border-slate-200 shadow-inner;
+}
+
+.workspace-nav-btn {
+  @apply rounded-2xl h-12 uppercase font-black text-[10px] shadow-sm cursor-pointer;
+}
+
+.workspace-main-content {
+  animation: slideInBottom 0.5s ease-out;
+}
+
+/* ─── Drawer ─── */
+
+.workspace-drawer {
+  @apply fixed z-50 overflow-hidden bg-white flex flex-col shadow-2xl border-none;
+  top: 0;
+  right: 0;
+  width: 100vw;
+  height: 100vh;
+  animation: slideInRight 0.3s ease-out;
+}
+
+@media (min-width: 640px) {
+  .workspace-drawer {
+    width: 90vw;
+  }
+}
+
+@media (min-width: 768px) {
+  .workspace-drawer {
+    width: 500px;
+    max-width: 500px;
+  }
+}
+
+.workspace-drawer-header {
+  @apply bg-[#0055A4] text-white p-3 md:p-6 flex flex-col items-start shrink-0 gap-2 md:gap-4 overflow-visible;
+}
+
+.workspace-drawer-title-group {
+  @apply text-left w-full flex flex-row items-center justify-between;
+}
+
+.workspace-drawer-title {
+  @apply text-lg md:text-2xl font-black tracking-tighter uppercase;
+}
+
+.workspace-drawer-badge {
+  @apply bg-white/20 text-white font-black text-[9px] uppercase px-3 py-1 border-none shadow-none;
+}
+
+.workspace-drawer-actions {
+  @apply flex flex-wrap gap-1.5 md:gap-4 w-full;
+}
+
+.workspace-escalate-btn {
+  @apply text-white border border-white/20 px-2 md:px-6 font-black text-[8px] md:text-[10px] uppercase h-7 md:h-11 rounded-xl cursor-pointer whitespace-nowrap;
+}
+.workspace-escalate-btn:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+.workspace-close-btn {
+  @apply h-8 w-8 md:h-11 md:w-11 text-white rounded-full cursor-pointer;
+}
+.workspace-close-btn:hover {
+  background: rgba(255,255,255,0.2);
+}
+
+.workspace-drawer-content {
+  @apply p-0 flex flex-col flex-1 min-h-0 bg-slate-50/50 overflow-hidden;
+}
+
+/* ─── Escalation Panel ─── */
+
+.workspace-escalation-panel {
+  @apply p-4 md:p-8 bg-white border-b shadow-inner shrink-0;
+  animation: slideInBottom 0.3s ease-out;
+}
+
+.workspace-panel-label {
+  @apply text-[11px] font-black text-slate-500 uppercase tracking-widest mb-4;
+}
+
+.workspace-escalation-grid {
+  @apply grid grid-cols-2 gap-4;
+}
+
+.workspace-escalation-option {
+  @apply h-20 rounded-2xl flex flex-col items-center justify-center border-slate-200 cursor-pointer transition-all;
+}
+.workspace-escalation-option:hover {
+  @apply border-[#0055A4];
+}
+
+/* ─── Ticket Summary Bar ─── */
+
+.workspace-ticket-summary-bar {
+  @apply p-2 md:p-4 bg-white border-b shadow-sm shrink-0;
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (min-width: 768px) {
+  .workspace-ticket-summary-bar {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+    overflow-x: visible;
+  }
+}
+
+.workspace-summary-item {
+  @apply flex items-center gap-2 md:gap-4 p-2 md:p-4 bg-slate-50 rounded-xl md:rounded-2xl border border-slate-100;
+  min-width: max-content;
+}
+
+@media (max-width: 767px) {
+  .workspace-summary-item {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    min-width: 80px;
+    padding: 0.5rem;
+  }
+  .workspace-summary-item svg {
+    width: 1rem;
+    height: 1rem;
+  }
+}
+
+.workspace-summary-item .item-label {
+  @apply text-[8px] md:text-[9px] font-black uppercase text-slate-400;
+}
+
+.workspace-summary-item .item-value {
+  @apply text-[10px] md:text-xs font-black text-slate-700;
+}
+
+/* ─── Description block ─── */
+.workspace-description-block {
+  @apply px-3 md:px-6 py-2 md:py-4 bg-white border-b shrink-0;
+}
+
+/* ─── Chat Container ─── */
+
+.workspace-chat-container {
+  @apply flex-1 min-h-0 relative overflow-auto;
+}
+
+.workspace-chat-wrapper {
+  @apply space-y-4 md:space-y-6 max-w-full mx-auto pb-8 p-3 md:p-6;
+}
+
+.workspace-ai-summary {
+  @apply bg-white p-5 rounded-2xl border-2 border-[#0055A4] shadow-md;
+}
+
+.ai-header {
+  @apply flex items-center gap-3 text-[#0055A4] mb-4;
+}
+
+.ai-label {
+  @apply text-xs font-black uppercase;
+}
+
+.ai-text {
+  @apply text-sm font-bold text-slate-800 leading-relaxed italic p-6 bg-[#0055A4]/5 rounded-2xl border border-[#0055A4]/10;
+}
+
+.workspace-initial-signal {
+  @apply bg-white p-8 rounded-3xl border shadow-sm space-y-6;
+}
+
+.signal-label {
+  @apply text-[10px] font-black text-slate-400 uppercase flex items-center gap-2;
+}
+
+.signal-text {
+  @apply text-base font-bold text-slate-800 italic p-6 bg-slate-50 rounded-2xl border-l-4 border-[#0055A4];
+}
+
+/* ─── Messages ─── */
+
+.workspace-messages-list {
+  @apply space-y-4 md:space-y-6;
+}
+
+.workspace-msg-group {
+  @apply flex flex-col;
+}
+
+.workspace-msg-group.outgoing {
+  @apply items-end;
+}
+
+.workspace-msg-group.incoming {
+  @apply items-start;
+}
+
+.workspace-msg-bubble {
+  @apply max-w-[85%] p-3 md:p-5 rounded-2xl md:rounded-3xl text-sm shadow-lg transition-all;
+}
+
+.workspace-msg-bubble.outgoing {
+  @apply bg-[#0055A4] text-white rounded-tr-none;
+}
+
+.workspace-msg-bubble.incoming {
+  @apply bg-white border border-slate-100 text-slate-800 rounded-tl-none;
+}
+
+.msg-text {
+  @apply font-bold leading-relaxed text-xs md:text-sm;
+}
+
+.msg-meta {
+  @apply flex items-center justify-between mt-2 md:mt-3 text-[8px] md:text-[9px] font-black uppercase opacity-60;
+}
+
+/* ─── Chat Footer ─── */
+
+.workspace-chat-footer {
+  @apply p-3 md:p-6 border-t bg-white space-y-2 md:space-y-4 shrink-0;
+}
+
+.workspace-resolve-btn {
+  @apply w-full h-9 md:h-12 font-black text-[9px] md:text-[10px] uppercase rounded-xl bg-emerald-600 shadow-lg text-white cursor-pointer transition-colors;
+}
+.workspace-resolve-btn:hover {
+  @apply bg-emerald-700;
+}
+
+.workspace-reply-form {
+  @apply flex gap-2 md:gap-4;
+}
+
+.workspace-reply-input {
+  @apply min-h-[50px] md:min-h-[80px] rounded-xl border-slate-200 bg-slate-50/50 transition-all text-xs md:text-sm;
+}
+.workspace-reply-input:focus {
+  @apply bg-white border-[#0055A4];
+}
+
+.workspace-send-btn {
+  @apply h-auto px-3 md:px-4 md:w-16 bg-[#0055A4] rounded-xl text-white shadow-xl cursor-pointer transition-transform;
+}
+.workspace-send-btn:active {
+  transform: scale(0.95);
+}
+
+.workspace-readonly-footer {
+  @apply p-4 md:p-8 border-t bg-amber-50 flex items-center gap-4 shrink-0;
+}
+
+.readonly-text {
+  @apply text-[10px] md:text-[11px] font-black text-amber-800 uppercase tracking-widest;
+}
+
+/* ─── Pieces jointes in drawer ─── */
+
+.workspace-pj-section {
+  @apply px-4 md:px-8 py-3 md:py-4 bg-white border-b shrink-0;
+}
+
+.workspace-pj-label {
+  @apply text-[9px] font-black text-slate-400 uppercase tracking-widest mb-3 flex items-center gap-2;
+}
+
+.workspace-pj-item {
+  @apply flex items-center gap-3 bg-slate-50 px-4 py-3 rounded-xl border border-slate-100 hover:bg-[#0055A4]/5 transition-colors cursor-pointer;
+}
+

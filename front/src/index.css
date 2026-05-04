@@ -1,0 +1,43 @@
+@import "tailwindcss";
+
+@theme {
+  /* AT Corporate Colors */
+  --color-primary: #0055A4;
+  --color-primary-hover: #004080;
+  --color-secondary: #059669;
+  --color-secondary-hover: #047857;
+  --color-success: #10B981;
+  --color-warning: #F59E0B;
+  --color-danger: #EF4444;
+
+  /* Grays */
+  --color-slate-50: #F8FAFC;
+  --color-slate-100: #F1F5F9;
+  --color-slate-200: #E2E8F0;
+  --color-slate-300: #CBD5E1;
+  --color-slate-400: #94A3B8;
+  --color-slate-500: #64748B;
+  --color-slate-700: #334155;
+  --color-slate-900: #0F172A;
+
+  /* Radii */
+  --radius-sm: 0.5rem;
+  --radius-md: 1rem;
+  --radius-lg: 1.5rem;
+
+  /* Fonts */
+  --font-title: 'Barlow Condensed', sans-serif;
+  --font-body: 'Barlow', sans-serif;
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html, body {
+    font-family: var(--font-body);
+  }
+}

@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Barlow:wght@400;600;700&display=swap');
+
+:root {
+  /* Charte AT */
+  --color-primary: #0055A4;
+  --color-primary-hover: #004080;
+  --color-success: #10B981;
+  --color-staff: #059669;
+  --color-warning: #F59E0B;
+  --color-danger: #EF4444;
+  --color-gray-50: #F8FAFC;
+  --color-gray-100: #F1F5F9;
+  --color-gray-200: #E2E8F0;
+  --color-gray-300: #CBD5E1;
+  --color-gray-400: #94A3B8;
+  --color-gray-500: #64748B;
+  --color-gray-700: #334155;
+  --color-gray-900: #0F172A;
+  
+  --bg-page: var(--color-gray-50);
+  --bg-card: #FFFFFF;
+  
+  --font-title: 'Barlow Condensed', sans-serif;
+  --font-body: 'Barlow', sans-serif;
+  
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+  --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  font-family: var(--font-body);
+  background-color: var(--bg-page);
+  color: var(--color-gray-900);
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+html[dir="rtl"] {
+  /* Des ajustements globaux pour RTL si nécessaire */
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-title);
+  color: var(--color-primary);
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+button {
+  font-family: var(--font-body);
+  cursor: pointer;
+  border: none;
+  border-radius: var(--radius-sm);
+  transition: all 0.2s ease;
+}
+
+.card {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  border-top: 10px solid var(--color-primary);
+  padding: 24px;
+}

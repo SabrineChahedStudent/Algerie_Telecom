@@ -1,0 +1,378 @@
+/* ============================================================
+   AUTH PAGES — Algérie Télécom Login
+   Matches the AT corporate design from the mockup
+   ============================================================ */
+
+/* --- Container --- */
+.auth-view-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background-color: #F8FAFC;
+  background-image: radial-gradient(circle at top right, rgba(0, 85, 164, 0.05), transparent),
+                    radial-gradient(circle at bottom left, rgba(252, 210, 56, 0.05), transparent);
+}
+
+/* --- Card --- */
+.auth-view-card {
+  width: 100%;
+  max-width: 480px;
+  border-top: 8px solid #0055A4;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+  border-radius: 24px;
+  overflow: hidden;
+  background: #FFFFFF;
+}
+
+/* --- Header --- */
+.auth-view-header {
+  text-align: center;
+  padding: 40px 40px 24px;
+}
+
+.auth-logo-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.auth-logo-wrapper {
+  background: #FFFFFF;
+  padding: 16px;
+  border-radius: 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid #F1F5F9;
+  display: inline-block;
+}
+
+.auth-logo-svg {
+  width: 64px;
+  height: 64px;
+}
+
+.auth-title-container {
+  margin-top: 8px;
+}
+
+.auth-main-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 2.25rem;
+  font-weight: 900;
+  color: #0055A4;
+  text-transform: uppercase;
+  letter-spacing: -0.05em;
+  margin: 0;
+}
+
+.auth-subtitle {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #10B981;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-top: 4px;
+}
+
+/* --- Content --- */
+.auth-view-content {
+  padding: 0 40px 32px;
+}
+
+/* --- Tab Selector (on combined page if needed) --- */
+.auth-tab-nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 56px;
+  background: #F1F5F9;
+  padding: 4px;
+  border-radius: 12px;
+  margin-bottom: 32px;
+}
+
+.auth-tab-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: none;
+  border-radius: 10px;
+  font-family: 'Barlow', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: transparent;
+  color: #64748B;
+}
+
+.auth-tab-btn.active {
+  background: #FFFFFF;
+  color: #0F172A;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.auth-tab-btn:hover:not(.active) {
+  color: #334155;
+}
+
+/* --- Form --- */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.auth-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.auth-input-label {
+  font-size: 0.625rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  color: #64748B;
+  margin-left: 4px;
+  letter-spacing: 0.05em;
+}
+
+.auth-input-wrapper {
+  position: relative;
+}
+
+.auth-input-icon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #94A3B8;
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+}
+
+.auth-input-field {
+  width: 100%;
+  height: 56px;
+  padding-left: 48px;
+  padding-right: 16px;
+  border-radius: 12px;
+  border: 1px solid #E2E8F0;
+  background: rgba(248, 250, 252, 0.5);
+  font-family: 'Barlow', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #0F172A;
+  transition: all 0.2s ease;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.auth-input-field::placeholder {
+  color: #94A3B8;
+  font-weight: 400;
+}
+
+.auth-input-field:focus {
+  background: #FFFFFF;
+  border-color: #0055A4;
+  box-shadow: 0 0 0 3px rgba(0, 85, 164, 0.1);
+}
+
+/* --- Submit Button --- */
+.auth-submit-btn {
+  width: 100%;
+  padding: 24px 16px;
+  border: none;
+  border-radius: 12px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  cursor: pointer;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15);
+  transition: all 0.15s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  margin-top: 8px;
+}
+
+.auth-submit-btn:active {
+  transform: scale(0.97);
+}
+
+.auth-submit-btn .btn-label-main {
+  font-size: 1.25rem;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+}
+
+.auth-submit-btn .btn-label-arabic {
+  font-size: 0.85rem;
+  opacity: 0.85;
+  font-weight: 400;
+}
+
+/* Customer button */
+.auth-submit-btn.customer {
+  background: #0055A4;
+  color: #FFFFFF;
+  box-shadow: 0 10px 25px -5px rgba(0, 85, 164, 0.3);
+}
+
+.auth-submit-btn.customer:hover {
+  background: #004080;
+}
+
+/* Staff button */
+.auth-submit-btn.staff {
+  background: #059669;
+  color: #FFFFFF;
+  box-shadow: 0 10px 25px -5px rgba(5, 150, 105, 0.3);
+}
+
+.auth-submit-btn.staff:hover {
+  background: #047857;
+}
+
+/* --- Error message --- */
+.auth-error {
+  background: #FEF2F2;
+  color: #DC2626;
+  padding: 12px 16px;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-align: center;
+  border: 1px solid #FECACA;
+  animation: shake 0.4s ease;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  75% { transform: translateX(6px); }
+}
+
+/* --- Footer --- */
+.auth-view-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid #F1F5F9;
+  padding: 24px 40px;
+  background: rgba(248, 250, 252, 0.3);
+}
+
+.auth-footer-info {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  font-size: 0.625rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  color: #94A3B8;
+}
+
+.auth-footer-separator {
+  color: #E2E8F0;
+}
+
+.auth-footer-tagline {
+  margin-top: 4px;
+  font-size: 0.5rem;
+  letter-spacing: 0.2em;
+  color: #CBD5E1;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+/* --- Link to switch between client/staff --- */
+.auth-switch-link {
+  text-align: center;
+  margin-top: 16px;
+  font-size: 0.8rem;
+  color: #64748B;
+}
+
+.auth-switch-link a {
+  color: #0055A4;
+  font-weight: 700;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.auth-switch-link a:hover {
+  color: #004080;
+  text-decoration: underline;
+}
+
+/* --- Language Switcher for auth --- */
+.auth-lang-switcher {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.auth-lang-btn {
+  padding: 4px 12px;
+  border-radius: 6px;
+  border: 1px solid #E2E8F0;
+  background: transparent;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #64748B;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.auth-lang-btn.active {
+  background: #0055A4;
+  color: #FFFFFF;
+  border-color: #0055A4;
+}
+
+.auth-lang-btn:hover:not(.active) {
+  background: #F1F5F9;
+  color: #334155;
+}
+
+/* --- Responsive mobile (client) --- */
+@media (max-width: 520px) {
+  .auth-view-container {
+    padding: 16px;
+  }
+  .auth-view-card {
+    border-radius: 20px;
+  }
+  .auth-view-header {
+    padding: 32px 24px 20px;
+  }
+  .auth-main-title {
+    font-size: 1.75rem;
+  }
+  .auth-subtitle {
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+  }
+  .auth-view-content {
+    padding: 0 24px 24px;
+  }
+  .auth-view-footer {
+    padding: 20px 24px;
+  }
+  .auth-submit-btn {
+    padding: 20px 16px;
+  }
+  .auth-submit-btn .btn-label-main {
+    font-size: 1.1rem;
+  }
+}

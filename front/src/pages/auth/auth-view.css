@@ -1,0 +1,248 @@
+@reference "../../index.css";
+
+/* ============================================================
+   AUTH PAGES — Algérie Télécom Login
+   Matches the AT corporate design from the mockup exactly
+   ============================================================ */
+
+.auth-view-container {
+  @apply min-h-screen flex items-center justify-center p-6 bg-slate-50;
+  background-image: radial-gradient(circle at top right, rgba(0, 85, 164, 0.05), transparent),
+    radial-gradient(circle at bottom left, rgba(252, 210, 56, 0.05), transparent);
+}
+
+.auth-view-card {
+  @apply w-full max-w-lg border-t-8 border-t-[#0055A4] shadow-2xl rounded-3xl overflow-hidden bg-white;
+}
+
+.auth-view-card.staff-card {
+  border-t-color: #059669;
+  /* Green accent for staff, if desired, though original didn't have it */
+}
+
+.auth-view-header {
+  @apply text-center space-y-6 py-10;
+}
+
+.auth-lang-row {
+  @apply flex justify-end px-10 mb-[-20px];
+}
+
+.auth-logo-container {
+  @apply flex justify-center;
+}
+
+.auth-logo-wrapper {
+  @apply inline-block p-1;
+}
+
+.auth-logo {
+  @apply w-40 h-40 sm:w-48 sm:h-48;
+  /* Doubled original size */
+}
+
+.auth-title-container {
+  margin-top: -16px;
+  /* Pulls the texts upwards closer to the logo */
+}
+
+.auth-main-title {
+  @apply text-5xl sm:text-6xl text-[#0055A4] uppercase;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  /* Less thick than black */
+  letter-spacing: 0.02em;
+  /* Not squished */
+  margin-top: 0;
+}
+
+.auth-subtitle {
+  @apply text-xl sm:text-2xl font-bold text-emerald-600 uppercase tracking-widest;
+  font-family: 'Barlow Condensed', sans-serif;
+  margin-top: 4px;
+}
+
+.auth-view-content {
+  @apply px-10 pb-8;
+}
+
+.auth-tabs-list {
+  @apply grid grid-cols-2 h-14 bg-slate-100 p-1 rounded-xl mb-10 gap-1;
+}
+
+.auth-tab-trigger {
+  @apply h-full rounded-lg font-bold flex items-center justify-center gap-2 text-xs uppercase transition-all bg-transparent text-slate-500 cursor-pointer border-none;
+}
+
+.auth-tab-trigger.active {
+  @apply bg-white text-slate-900 shadow-sm;
+}
+
+.auth-tab-trigger:hover:not(.active) {
+  @apply text-slate-700 bg-slate-200/50;
+}
+
+.auth-form {
+  @apply space-y-6;
+}
+
+.auth-field {
+  @apply space-y-2;
+}
+
+.auth-input-label {
+  @apply text-[10px] font-black uppercase text-slate-500 ml-1 block;
+}
+
+.auth-input-wrapper {
+  @apply relative;
+}
+
+.auth-input-icon {
+  @apply absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 w-5 h-5;
+}
+
+.auth-input-field {
+  @apply w-full h-14 pl-12 rounded-xl border border-slate-200 bg-slate-50/50 font-bold transition-all focus:bg-white focus:border-[#0055A4] focus:ring-[#0055A4] outline-none;
+}
+
+.auth-submit-btn {
+  @apply w-full flex flex-col items-center justify-center gap-1 border-none cursor-pointer;
+  padding: 24px 16px;
+  border-radius: 12px;
+  font-family: 'Barlow Condensed', sans-serif;
+  transition: all 0.15s ease;
+  margin-top: 24px;
+}
+
+.auth-submit-btn:active {
+  transform: scale(0.97);
+}
+
+.auth-submit-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.btn-label-main {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.btn-label-arabic {
+  font-size: 0.85rem;
+  opacity: 0.85;
+  font-weight: 400;
+}
+
+.auth-submit-btn.customer {
+  background: #0055A4;
+  color: #FFFFFF;
+  box-shadow: 0 10px 25px -5px rgba(0, 85, 164, 0.3);
+}
+
+.auth-submit-btn.customer:hover:not(:disabled) {
+  background: #004080;
+}
+
+.auth-submit-btn.staff {
+  background: #059669;
+  color: #FFFFFF;
+  box-shadow: 0 10px 25px -5px rgba(5, 150, 105, 0.3);
+}
+
+.auth-submit-btn.staff:hover:not(:disabled) {
+  background: #047857;
+}
+
+.auth-error {
+  @apply text-center bg-red-50 text-red-600 p-3 rounded-lg text-sm font-semibold border border-red-200 mt-4 mb-4;
+  animation: shake 0.4s ease;
+}
+
+@keyframes shake {
+
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  25% {
+    transform: translateX(-6px);
+  }
+
+  75% {
+    transform: translateX(6px);
+  }
+}
+
+.auth-view-footer {
+  @apply flex flex-col gap-2 justify-center border-t border-slate-100 py-8 text-[10px] text-slate-400 font-black uppercase bg-slate-50/30 text-center;
+}
+
+.auth-footer-info {
+  @apply flex gap-4 justify-center items-center;
+}
+
+.auth-footer-separator {
+  @apply text-slate-200;
+}
+
+.auth-footer-tagline {
+  @apply mt-1 text-[8px] tracking-[0.2em] text-slate-300;
+}
+
+/* --- Language Switcher mini --- */
+.language-switcher {
+  @apply flex justify-center gap-1 mb-8;
+}
+
+.language-switcher button {
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid #E2E8F0;
+  background: transparent;
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #64748B;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.language-switcher button.active {
+  background: #0055A4;
+  color: #FFFFFF;
+  border-color: #0055A4;
+}
+
+@media (max-width: 520px) {
+  .auth-view-container {
+    padding: 16px;
+  }
+
+  .auth-view-card {
+    border-radius: 20px;
+  }
+
+  .auth-view-header {
+    padding: 32px 24px 20px;
+  }
+
+  .auth-main-title {
+    font-size: 1.75rem;
+  }
+
+  .auth-view-content {
+    padding: 0 24px 24px;
+    margin-top: 10px;
+  }
+
+  .auth-submit-btn {
+    padding: 20px 16px;
+  }
+
+  .btn-label-main {
+    font-size: 1.1rem;
+  }
+}

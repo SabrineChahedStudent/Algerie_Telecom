@@ -1,0 +1,38 @@
+@reference "../../index.css";
+
+/* ============================================================
+   PORTAL VIEW — Client Dashboard Content
+   ============================================================ */
+
+.portal-view-container {
+  @apply max-w-6xl mx-auto space-y-8 py-6;
+}
+
+.portal-header {
+  @apply flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6 border-b pb-8;
+}
+
+.portal-title-group {
+  @apply space-y-1;
+}
+
+.portal-main-title {
+  @apply text-3xl font-black text-slate-900 tracking-tighter uppercase leading-tight;
+}
+
+.portal-subtitle {
+  @apply text-slate-500 text-[10px] font-black uppercase tracking-[0.2em] mt-1;
+}
+
+.portal-tabs-nav {
+  @apply flex bg-slate-100 p-1 rounded-2xl border border-slate-200 shadow-sm;
+}
+
+.portal-tab-btn {
+  @apply rounded-xl text-[10px] font-black uppercase px-8 h-11 transition-all;
+}
+
+.portal-tab-btn.active {
+  @apply bg-[#0055A4] text-white shadow-lg;
+  box-shadow: 0 10px 15px -3px rgba(0, 85, 164, 0.2);
+}

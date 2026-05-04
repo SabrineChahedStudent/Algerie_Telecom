@@ -1,0 +1,117 @@
+@reference "../index.css";
+
+/* ============================================================
+   DASHBOARD LAYOUT — Sidebar + Main Content
+   ============================================================ */
+
+.dashboard-layout {
+  @apply flex min-h-screen bg-slate-50;
+}
+
+/* ─── Sidebar ─── */
+.sidebar {
+  @apply w-56 bg-white border-r border-slate-100 flex flex-col fixed inset-y-0 left-0 z-40;
+}
+
+.sidebar-brand {
+  @apply flex items-center gap-3 px-5 py-6 border-b border-slate-100;
+}
+
+.sidebar-brand-icon {
+  @apply w-9 h-9 rounded-full bg-[#0055A4] flex items-center justify-center text-white shadow-lg;
+}
+
+.sidebar-brand-text h2 {
+  @apply text-sm font-black text-slate-900 uppercase tracking-tight leading-none;
+}
+
+.sidebar-brand-text p {
+  @apply text-[8px] font-black text-[#0055A4] uppercase tracking-[0.15em] mt-0.5;
+}
+
+.sidebar-section-label {
+  @apply text-[9px] font-black text-slate-400 uppercase tracking-[0.2em] px-5 pt-8 pb-3;
+}
+
+.sidebar-nav {
+  @apply flex-1 px-3;
+}
+
+.sidebar-nav-item {
+  @apply flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-bold text-slate-500 hover:bg-slate-50 hover:text-slate-900 transition-all cursor-pointer w-full border-none bg-transparent text-left;
+}
+
+.sidebar-nav-item.active {
+  @apply bg-slate-100 text-slate-900 font-black;
+}
+
+.sidebar-nav-item svg {
+  @apply w-4 h-4;
+}
+
+/* ─── Sidebar Footer ─── */
+.sidebar-footer {
+  @apply mt-auto border-t border-slate-100 p-4 space-y-3;
+}
+
+.sidebar-user {
+  @apply flex items-center gap-3 px-2;
+}
+
+.sidebar-user-avatar {
+  @apply w-8 h-8 rounded-full bg-[#0055A4]/10 flex items-center justify-center text-[#0055A4];
+}
+
+.sidebar-user-info h4 {
+  @apply text-[10px] font-black text-slate-900 uppercase leading-none;
+}
+
+.sidebar-user-info p {
+  @apply text-[8px] font-black text-[#0055A4] uppercase tracking-wider mt-0.5;
+}
+
+.sidebar-logout-btn {
+  @apply flex items-center gap-2 text-[10px] font-black text-red-500 uppercase tracking-wider px-2 py-1.5 hover:bg-red-50 rounded-lg transition-all cursor-pointer w-full border-none bg-transparent text-left;
+}
+
+.sidebar-logout-btn svg {
+  @apply w-4 h-4;
+}
+
+/* ─── Language Switcher in Sidebar ─── */
+.sidebar .language-switcher {
+  @apply flex items-center justify-center gap-1 px-4 py-2;
+}
+.sidebar .language-switcher button {
+  @apply px-2.5 py-1 rounded-lg text-[10px] font-black uppercase tracking-wider
+         text-slate-400 bg-transparent border border-transparent
+         cursor-pointer transition-all;
+}
+.sidebar .language-switcher button:hover {
+  @apply text-slate-600 bg-slate-50;
+}
+.sidebar .language-switcher button.active {
+  @apply text-[#0055A4] bg-[#0055A4]/10 border-[#0055A4]/20;
+}
+
+/* ─── Main Content Area ─── */
+.dashboard-main {
+  @apply flex-1 ml-56;
+}
+
+.dashboard-content {
+  @apply p-8;
+}
+
+/* ─── Mobile Responsive ─── */
+@media (max-width: 768px) {
+  .sidebar {
+    @apply -translate-x-full transition-transform;
+  }
+  .sidebar.open {
+    @apply translate-x-0;
+  }
+  .dashboard-main {
+    @apply ml-0;
+  }
+}
