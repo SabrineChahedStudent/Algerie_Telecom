@@ -21,37 +21,39 @@ def run_hf_triage(service_name, issue_description, chat_history=''):
     system_prompt = """You are a highly empathetic, conversational, and precise virtual technical support agent for Algérie Télécom. You must act exactly like a real human agent talking to a customer.
 
 Strict Guidelines:
-1. Language Consistency: You MUST reply in the exact same language the client used in their complaint. Do NOT switch languages. Continue the entire conversation in that language.
-2. Short & Precise: Keep your replies very short, conversational, and precise. Avoid long paragraphs.
-3. Step-by-Step Solutions: Propose troubleshooting solutions ONE BY ONE. Suggest one step, ask the user to try it, and wait for their response. Do NOT give a long list of steps at once. If a step doesn't work, suggest the next one shortly. If the user says the solutions are not working after multiple attempts, ask them: "Would you like me to submit a ticket for an agent to contact you?" (translate this to their language).
-4. Scope & Ambiguity: If the client asks anything unrelated to telecommunications issues (internet, ADSL, fiber, 4G, landline, Algérie Télécom, etc.), OR if they use ambiguous words, a mix of languages, or something you don't exactly understand, you MUST reply exactly with the equivalent of "This is outside the scope" in the language used by the user. 
-5. Empathy & Tone: Express empathy briefly. Use a polite, human-like tone.
-6. JSON Output: You MUST respond ONLY with a valid JSON object. No extra text. The JSON must contain exactly:
+1. Strict Language Consistency: EVERY SINGLE MESSAGE you send, from the very beginning of the conversation until the end, MUST be EXACTLY in the same language as the language in which the INITIAL complaint was submitted. Do NOT switch languages under any circumstances.
+2. Brief Responses: Keep your replies extremely brief, conversational, and precise. Avoid long paragraphs.
+3. Maximum 3 Solutions: You are allowed to suggest AT MOST 3 solutions for the client to try, ONE BY ONE. Suggest one step, ask the user to try it, and wait for their response. Do NOT give a long list of steps at once.
+4. Ticket Submission: If the 3 suggested solutions did not work, stop suggesting solutions and immediately ask the client if they want to submit a ticket for an agent to contact them (translated into their language).
+5. Nonsense & Out of Scope: If the client types random letters/gibberish (e.g., "jhkhkhk"), uses insults (e.g., "f u"), asks about unrelated topics, or writes something incomprehensible, you MUST immediately ABORT troubleshooting. Reply EXACTLY with the equivalent of "This is outside the scope" in the user's language. Do NOT apologize, do NOT suggest any solutions, and do NOT try to continue the troubleshooting if the input is nonsense.
+6. Empathy & Tone: Express empathy briefly. Use a polite, human-like tone.
+7. JSON Output: You MUST respond ONLY with a valid JSON object. No extra text. The JSON must contain exactly:
    - "reply" : (string) Your complete, short response to the client.
    - "is_resolved": (boolean) Set to true ONLY if the client confirms the problem is fully resolved.
-   - "can_submit": (boolean) Set to true if the client says the solutions did not work and wants to submit a ticket.
+   - "can_submit": (boolean) Set to true if the client says the solutions did not work and wants to submit a ticket (or after the 3 solutions failed).
    - "auto_submit": (boolean) Set to true ONLY if you asked the user if they want to submit a ticket, and they explicitly replied 'yes'.
+   - "is_nonsense": (boolean) Set to true ONLY if you determined the user's input was nonsense, an insult, or out of scope.
 
 Example 1:
 User: Mon internet est très lent depuis ce matin.
-Bot: { "reply": "Je suis désolé pour ces lenteurs. Pourrions-nous commencer par redémarrer votre modem ? Débranchez-le 30 secondes, rebranchez-le, et dites-moi si ça va mieux.", "is_resolved": false, "can_submit": false }
+Bot: { "reply": "Je suis désolé pour ces lenteurs. Pourrions-nous commencer par redémarrer votre modem ? Débranchez-le 30 secondes, rebranchez-le, et dites-moi si ça va mieux.", "is_resolved": false, "can_submit": false, "auto_submit": false, "is_nonsense": false }
 
 Example 2:
 User: It still doesn't work after restarting.
-Bot: { "reply": "I'm sorry it didn't work. Let's try another step. Are you connected via Wi-Fi or with a cable?", "is_resolved": false, "can_submit": false }
+Bot: { "reply": "I'm sorry it didn't work. Let's try another step. Are you connected via Wi-Fi or with a cable?", "is_resolved": false, "can_submit": false, "auto_submit": false, "is_nonsense": false }
 
 Example 3:
-User: mix of words chouia anglais and arabic
-Bot: { "reply": "This is outside the scope", "is_resolved": false, "can_submit": false }
+User: f u
+Bot: { "reply": "This is outside the scope", "is_resolved": false, "can_submit": false, "auto_submit": false, "is_nonsense": true }
 
 Example 4:
-User: What is the recipe for a cake?
-Bot: { "reply": "This is outside the scope", "is_resolved": false, "can_submit": false, "auto_submit": false }
+User: jhkhkhk
+Bot: { "reply": "This is outside the scope", "is_resolved": false, "can_submit": false, "auto_submit": false, "is_nonsense": true }
 
 Example 5:
-Bot: These solutions did not work. Would you like me to submit a ticket?
+Bot: These 3 solutions did not work. Would you like me to submit a ticket?
 User: Yes please.
-Bot: { "reply": "Your ticket is being submitted.", "is_resolved": false, "can_submit": true, "auto_submit": true }
+Bot: { "reply": "Your ticket is being submitted.", "is_resolved": false, "can_submit": true, "auto_submit": true, "is_nonsense": false }
 """
 
     prompt = f"Historique :\n{chat_history}\n\nClient (Service: {service_name}): {issue_description}\n\nRéponds UNIQUEMENT en JSON valide."
@@ -169,6 +171,55 @@ Rédige uniquement le résumé, sans texte additionnel, en français.
             break
         except Exception as e:
             print(f"Erreur lors de la génération du résumé: {e}")
+            break
+            
+    return "Résumé IA non disponible en raison d'une erreur technique."
+
+def generer_resume_escalade(historique_chat):
+    if not GEMINI_API_KEY or GEMINI_API_KEY == 'REPLACE_ME_WITH_YOUR_GEMINI_KEY':
+        return "Résumé IA non disponible (Clé API manquante)."
+        
+    API_URL = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key={GEMINI_API_KEY}"
+    
+    prompt = f"""Tu es un agent expert d'Algérie Télécom.
+Voici l'historique complet d'une conversation entre un agent du helpdesk et un client.
+Ton objectif est de rédiger un résumé clair, précis et professionnel de cette conversation pour l'agent technique (ou annexe) qui va prendre le relais suite à une escalade du ticket.
+
+Le résumé doit inclure :
+- Le problème initial.
+- Les actions tentées par le helpdesk.
+- Les réponses du client.
+- La raison de l'escalade (si explicite ou déduite de l'échange).
+
+Historique de la conversation :
+{historique_chat}
+
+Rédige uniquement le résumé, sans texte additionnel, en français.
+"""
+
+    payload = {
+        "contents": [{"role": "user", "parts": [{"text": prompt}]}],
+        "generationConfig": {"temperature": 0.2}
+    }
+    
+    max_retries = 3
+    base_delay = 2
+    for attempt in range(max_retries):
+        try:
+            req = urllib.request.Request(API_URL, data=json.dumps(payload).encode('utf-8'), headers={"Content-Type": "application/json"})
+            resp = urllib.request.urlopen(req, timeout=15)
+            data = json.loads(resp.read().decode('utf-8'))
+            text = data.get("candidates", [{}])[0].get("content", {}).get("parts", [{}])[0].get("text", "")
+            return text.strip()
+        except urllib.error.HTTPError as e:
+            if e.code == 429 and attempt < max_retries - 1:
+                import time
+                time.sleep(base_delay * (2 ** attempt))
+                continue
+            print(f"Erreur HTTP lors de la génération du résumé d'escalade: {e}")
+            break
+        except Exception as e:
+            print(f"Erreur lors de la génération du résumé d'escalade: {e}")
             break
             
     return "Résumé IA non disponible en raison d'une erreur technique."

@@ -24,7 +24,7 @@ export function SupportChatbot({ isOpen, ticketData, onCancel, onForceSubmit }) 
 
   const startConversation = async () => {
     setLoading(true);
-    setHistory([{ role: 'bot', text: 'Bonjour, je suis l\'assistant d\'Algérie Télécom. Laissez-moi analyser votre problème pour voir si je peux vous aider immédiatement...' }]);
+    setHistory([]);
     
     try {
       const resp = await chatWithSupport({
@@ -32,9 +32,9 @@ export function SupportChatbot({ isOpen, ticketData, onCancel, onForceSubmit }) 
         description: ticketData.description || '',
         history: ''
       });
-      setHistory(prev => [...prev, { role: 'bot', text: resp.reply, is_resolved: resp.is_resolved, can_submit: resp.can_submit, auto_submit: resp.auto_submit }]);
+      setHistory([{ role: 'bot', text: resp.reply, is_resolved: resp.is_resolved, can_submit: resp.can_submit, auto_submit: resp.auto_submit, is_nonsense: resp.is_nonsense }]);
     } catch (err) {
-      setHistory(prev => [...prev, { role: 'bot', text: 'Je rencontre un souci technique pour analyser. Dois-je soumettre votre réclamation directement aux agents ?', can_submit: true }]);
+      setHistory([{ role: 'bot', text: 'System Error. Can I submit the ticket? / Erreur système. Dois-je soumettre le ticket ?', can_submit: true }]);
     } finally {
       setLoading(false);
     }
@@ -63,13 +63,14 @@ export function SupportChatbot({ isOpen, ticketData, onCancel, onForceSubmit }) 
       
       setHistory(prev => [...prev, { 
         role: 'bot', 
-        text: resp.reply || "Pouvez-vous préciser ?", 
+        text: resp.reply || "...", 
         is_resolved: resp.is_resolved, 
         can_submit: resp.can_submit,
-        auto_submit: resp.auto_submit
+        auto_submit: resp.auto_submit,
+        is_nonsense: resp.is_nonsense
       }]);
     } catch (err) {
-      setHistory(prev => [...prev, { role: 'bot', text: "Erreur réseau. Continuer la soumission ?", can_submit: true }]);
+      setHistory(prev => [...prev, { role: 'bot', text: "Network error. Submit ticket? / Erreur réseau. Soumettre le ticket ?", can_submit: true }]);
     } finally {
       setLoading(false);
     }
@@ -85,6 +86,13 @@ export function SupportChatbot({ isOpen, ticketData, onCancel, onForceSubmit }) 
       onForceSubmit(history);
     }
   }, [autoSubmitNow]);
+
+  useEffect(() => {
+    const nonsenseCount = history.filter(m => m.is_nonsense).length;
+    if (nonsenseCount >= 2) {
+      onCancel();
+    }
+  }, [history, onCancel]);
 
   if (!isOpen) return null;
 

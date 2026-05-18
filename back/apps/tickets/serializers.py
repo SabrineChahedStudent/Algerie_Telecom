@@ -237,7 +237,23 @@ class CreerEscaladeSerializer(serializers.Serializer):
         else:
             ticket.statut = StatutTicket.ESCALADE_ANNEXE
         ticket.save()
-        escalade = Escalade.objects.create(ticket=ticket, agent_source=agent_source, **validated_data)
+
+        # Generate AI summary based on chat messages
+        from apps.chat.models import Message
+        messages = Message.objects.filter(ticket=ticket).order_by('created_at')
+        if messages.exists():
+            historique_lignes = []
+            for msg in messages:
+                role = "Client" if msg.expediteur_type == "client" else "Agent Helpdesk"
+                historique_lignes.append(f"{role}: {msg.contenu}")
+            historique_chat = "\n".join(historique_lignes)
+            
+            from apps.tickets.hf_triage import generer_resume_escalade
+            resume_ia = generer_resume_escalade(historique_chat)
+        else:
+            resume_ia = "Aucun échange de messages disponible avant l'escalade."
+
+        escalade = Escalade.objects.create(ticket=ticket, agent_source=agent_source, resume_ia=resume_ia, **validated_data)
 
         # Notification email au client
         try:
